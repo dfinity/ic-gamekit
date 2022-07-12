@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.dfinity.icbuilder": {
+    "com.dfinity.ic-builder": {
       "version": "file:com.dfinity.icbuilder",
       "depth": 0,
       "source": "embedded",

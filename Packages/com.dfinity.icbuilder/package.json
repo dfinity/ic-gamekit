@@ -1,9 +1,10 @@
 {
-  "name": "com.dfinity.icbuilder",
+  "name": "com.dfinity.ic-builder",
   "displayName": "Internet Computer Builder",
-  "version": "0.1.0",
+  "version": "0.1.0-pre",
   "unity": "2020.3",
   "description": "A Unity plugin to build to Internet Computer project.",
+  "author": {"name": "Dfinity"},
   "keywords": [
     "Internet Computer",
     "Builder",
