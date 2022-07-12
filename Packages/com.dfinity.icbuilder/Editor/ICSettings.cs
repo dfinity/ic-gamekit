@@ -3,8 +3,15 @@ using UnityEngine.UIElements;
 
 namespace InternetComputer
 {
+    internal class ICSettings
+    {
+
+    }
+
     internal class ICSettingsProvider : SettingsProvider
     {
+        public const string k_ICSettingsPath = "ProjectSettings/icsettings.asset";
+
         private ICSettingsProvider(string path, SettingsScope scopes)
             : base(path, scopes)
         {
@@ -14,7 +21,7 @@ namespace InternetComputer
         [SettingsProvider]
         static SettingsProvider CreateICSettingsProvider()
         {
-            return new ICSettingsProvider("Project/Internet Computer Settings", SettingsScope.Project);
+            return new ICSettingsProvider("Project/Internet Computer", SettingsScope.Project);
         }
 
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -29,7 +36,7 @@ namespace InternetComputer
 
         private void Initialize()
         {
-            label = "Internet Computer Settings";
+            label = "Internet Computer";
         }
 
         public override void OnGUI(string searchContext)
