@@ -1,8 +1,7 @@
 # Internet Computer Builder for Unity
 A Unity plugin to build to Internet Computer project. It's under `Packages/com.dfinity.icbuilder` folder which contains a Unity package for Internet Computer.
 
-
-## Install
+## Installing
 You can install the package from `Unity Package Manager` via using `Add package from git URL...` menu, by inputing the following URL.
 
 ```
