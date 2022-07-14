@@ -1,5 +1,5 @@
 {
-    "name": "com.dfinity.icbuilder",
+    "name": "com.ic.unity-builder",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
