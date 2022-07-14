@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.dfinity.ic-builder": {
-      "version": "file:com.dfinity.icbuilder",
+    "com.ic.unity-builder": {
+      "version": "file:com.ic.unity-builder",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

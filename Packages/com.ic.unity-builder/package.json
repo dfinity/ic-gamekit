@@ -1,5 +1,5 @@
 {
-  "name": "com.dfinity.ic-builder",
+  "name": "com.ic.unity-builder",
   "displayName": "Internet Computer Builder",
   "version": "0.1.0-pre",
   "unity": "2020.3",
