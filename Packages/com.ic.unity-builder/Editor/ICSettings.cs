@@ -13,10 +13,10 @@ namespace InternetComputer
 
         public bool m_ICBuildEnabled;
 
-        internal static ICSettings GetOrCreateSettings()
+        internal static ICSettings GetSettings(bool create = false)
         {
             var settings = AssetDatabase.LoadAssetAtPath<ICSettings>(k_ICSettingsPath);
-            if (settings == null)
+            if (create && settings == null)
             {
                 settings = ScriptableObject.CreateInstance<ICSettings>();
                 settings.m_CanisterName = "unity_webgl_template_assets";
@@ -36,7 +36,7 @@ namespace InternetComputer
 
         internal static SerializedObject GetSerializedSettings()
         {
-            return new SerializedObject(GetOrCreateSettings());
+            return new SerializedObject(GetSettings(true));
         }
     }
 
@@ -69,10 +69,6 @@ namespace InternetComputer
         public override void OnDeactivate()
         {
             base.OnDeactivate();
-
-            if (m_ICSettings != null)
-            {
-            }
         }
 
         public override void OnGUI(string searchContext)
