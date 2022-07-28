@@ -27,6 +27,7 @@ namespace InternetComputer
             Debug.Log("IC Builder gets called for Unity WebGL build.");
 
             MoveFiles(report, icSettings);
+            GenerateDfxJsonFile(report, icSettings);
         }
 
         private void MoveFiles(BuildReport report, ICSettings icSettings)
@@ -74,7 +75,32 @@ namespace InternetComputer
 
         private void GenerateDfxJsonFile(BuildReport report, ICSettings icSettings)
         {
+            // For now, the json support in Unity is limited to Unity Serialization system, which has limitations like Dictionary etc.
+            // And we'd better not use 3rd-party json libs as we're building a tool package,
+            // the 3rd-party libs introduced by us might conflict with the ones added by end-users.
 
+            // Here we simply generate json text without using advanced libs.
+            var canisterRelatativePath = Path.Combine("src", icSettings.m_CanisterName);
+
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("{");
+            sw.WriteLine("  \"canisters\": {");
+            sw.WriteLine("    \"" + icSettings.m_CanisterName +  "\": {");
+            sw.WriteLine("      \"frontend\": {");
+            sw.WriteLine("        \"entrypoint\": \"" + Path.Combine(canisterRelatativePath, "src", kWebGLIndexFile).Replace("\\", "/") + "\"");
+            sw.WriteLine("      },");
+            sw.WriteLine("      \"source\": [");
+            sw.WriteLine("        \"" + Path.Combine(canisterRelatativePath, "assets").Replace("\\", "/") + "\",");
+            sw.WriteLine("        \"" + Path.Combine(canisterRelatativePath, "src").Replace("\\", "/") + "\"");
+            sw.WriteLine("      ],");
+            sw.WriteLine("      \"type\": \"assets\"");
+            sw.WriteLine("    }");
+            sw.WriteLine("  },");
+
+            sw.WriteLine("  \"version\": 1");
+            sw.WriteLine("}");
+
+            File.WriteAllText(Path.Combine(report.summary.outputPath, "ic-builder", "dfx.json"), sw.ToString());
         }
     }
 }
