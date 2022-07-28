@@ -24,12 +24,11 @@ namespace InternetComputer
             if (icSettings == null || !icSettings.m_ICBuildEnabled)
                 return;
 
-            Debug.Log("IC Builder gets called for Unity WebGL build.");
-
             MoveFiles(report, icSettings);
             GenerateDfxJsonFile(report, icSettings);
         }
 
+        // Convert the Unity WebGL build content into a dfx project under "ic-builder" folder.
         private void MoveFiles(BuildReport report, ICSettings icSettings)
         {
             if (string.IsNullOrEmpty(icSettings.m_CanisterName))
@@ -53,13 +52,14 @@ namespace InternetComputer
                 Directory.CreateDirectory(canisterSrcPath);
             }
 
-            // Start to copy files to ic builder path.
+            // Start to copy files to ic-builder path.
             var webglBuildPath = Path.Combine(report.summary.outputPath, kWebGLBuildDirectory);
             if (Directory.Exists(webglBuildPath))
             {
                 FileUtil.CopyFileOrDirectory(webglBuildPath, Path.Combine(canisterAssetsPath, kWebGLBuildDirectory));
             }
 
+            // Template data exists for Default build.
             var webglTemplateDataPath = Path.Combine(report.summary.outputPath, kWebGLTemplateDataDirectory);
             if (Directory.Exists(webglTemplateDataPath))
             {
@@ -73,13 +73,12 @@ namespace InternetComputer
             }
         }
 
+        // For now, the json support in Unity is bound to Unity serialization system, which has limitations like not supporting Dictionary etc.
+        // Also using 3rd-party json libs might cause unexpected problems as we're building a tool package,
+        // the 3rd-party libs introduced by us might conflict with the ones added by end-users.
+        // For now I simply generate json text without using advanced libs, will find out if there's a better way to do this.
         private void GenerateDfxJsonFile(BuildReport report, ICSettings icSettings)
         {
-            // For now, the json support in Unity is limited to Unity Serialization system, which has limitations like Dictionary etc.
-            // And we'd better not use 3rd-party json libs as we're building a tool package,
-            // the 3rd-party libs introduced by us might conflict with the ones added by end-users.
-
-            // Here we simply generate json text without using advanced libs.
             var canisterRelatativePath = Path.Combine("src", icSettings.m_CanisterName);
 
             StringWriter sw = new StringWriter();
