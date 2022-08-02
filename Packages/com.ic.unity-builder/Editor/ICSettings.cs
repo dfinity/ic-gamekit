@@ -11,13 +11,16 @@ namespace InternetComputer
 
         public string m_CanisterName;
 
-        internal static ICSettings GetOrCreateSettings()
+        public bool m_ICBuildEnabled;
+
+        internal static ICSettings GetSettings(bool create = false)
         {
             var settings = AssetDatabase.LoadAssetAtPath<ICSettings>(k_ICSettingsPath);
-            if (settings == null)
+            if (create && settings == null)
             {
                 settings = ScriptableObject.CreateInstance<ICSettings>();
                 settings.m_CanisterName = "unity_webgl_template_assets";
+                settings.m_ICBuildEnabled = false;
 
                 if (!Directory.Exists("Assets/Editor"))
                 {
@@ -33,7 +36,7 @@ namespace InternetComputer
 
         internal static SerializedObject GetSerializedSettings()
         {
-            return new SerializedObject(GetOrCreateSettings());
+            return new SerializedObject(GetSettings(true));
         }
     }
 
@@ -42,6 +45,7 @@ namespace InternetComputer
         private SerializedObject m_ICSettings;
 
         private static GUIContent s_CanisterNameStyle = new GUIContent("Canister Name");
+        private static GUIContent s_ICBuildStyle = new GUIContent("Enable IC Build");
 
         private ICSettingsProvider(string path, SettingsScope scopes)
             : base(path, scopes)
@@ -65,18 +69,21 @@ namespace InternetComputer
         public override void OnDeactivate()
         {
             base.OnDeactivate();
-
-            if (m_ICSettings != null)
-            {
-            }
         }
 
         public override void OnGUI(string searchContext)
         {
+            const int kPadding = 15;
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Space(15);
+            GUILayout.Space(kPadding);
             EditorGUILayout.PropertyField(m_ICSettings.FindProperty("m_CanisterName"), s_CanisterNameStyle);
-            GUILayout.Space(15);
+            GUILayout.Space(kPadding);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space(kPadding);
+            EditorGUILayout.PropertyField(m_ICSettings.FindProperty("m_ICBuildEnabled"), s_ICBuildStyle);
+            GUILayout.Space(kPadding);
             EditorGUILayout.EndHorizontal();
 
             m_ICSettings.ApplyModifiedProperties();
