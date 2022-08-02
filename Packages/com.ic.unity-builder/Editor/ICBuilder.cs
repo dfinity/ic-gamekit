@@ -43,14 +43,12 @@ namespace InternetComputer
             var canisterAssetsPath = Path.Combine(canisterPath, "assets");
             var canisterSrcPath = Path.Combine(canisterPath, "src");
             if (Directory.Exists(icBuilderPath))
-            {
                 Directory.Delete(icBuilderPath, true);
 
-                Directory.CreateDirectory(icBuilderPath);
-                Directory.CreateDirectory(canisterPath);
-                Directory.CreateDirectory(canisterAssetsPath);
-                Directory.CreateDirectory(canisterSrcPath);
-            }
+            Directory.CreateDirectory(icBuilderPath);
+            Directory.CreateDirectory(canisterPath);
+            Directory.CreateDirectory(canisterAssetsPath);
+            Directory.CreateDirectory(canisterSrcPath);
 
             // Start to copy files to ic-builder path.
             var webglBuildPath = Path.Combine(report.summary.outputPath, kWebGLBuildDirectory);
