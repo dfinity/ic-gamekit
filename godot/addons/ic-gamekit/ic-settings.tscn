@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/ic-gamekit/ic-settings.gd" type="Script" id=1]
+
+[node name="IC Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 76.0
+
+[node name="LeftColumn" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 76.0
+
+[node name="CanisterName" type="Label" parent="HBoxContainer/LeftColumn"]
+margin_right = 128.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 128, 24 )
+text = "Canister Name"
+valign = 1
+
+[node name="ICConnector" type="Label" parent="HBoxContainer/LeftColumn"]
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 128, 24 )
+text = "Enable IC Connector"
+valign = 1
+
+[node name="RightColumn" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 132.0
+margin_right = 1004.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/RightColumn"]
+margin_right = 872.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "godot_html5_assets"
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer/RightColumn"]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 52.0
+size_flags_horizontal = 0
+
+[node name="Button" type="Button" parent="HBoxContainer/RightColumn"]
+margin_left = 831.0
+margin_top = 56.0
+margin_right = 872.0
+margin_bottom = 76.0
+size_flags_horizontal = 8
+text = "Save"
