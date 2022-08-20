@@ -15,7 +15,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot-plugin-refresher/plugin.cfg", "res://addons/ic-gamekit/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ic-gamekit/plugin.cfg" )
 
 [physics]
 
