@@ -8,6 +8,7 @@ namespace InternetComputer
     internal class ICSettings : ScriptableObject
     {
         public const string k_ICSettingsPath = "Assets/Editor/icsettings.asset";
+        public const string k_DefaultCanisterName = "unity_webgl_assets";
 
         public string m_CanisterName;
 
@@ -19,7 +20,7 @@ namespace InternetComputer
             if (create && settings == null)
             {
                 settings = ScriptableObject.CreateInstance<ICSettings>();
-                settings.m_CanisterName = "unity_webgl_template_assets";
+                settings.m_CanisterName = k_DefaultCanisterName;
                 settings.m_ICBuildEnabled = false;
 
                 if (!Directory.Exists("Assets/Editor"))
