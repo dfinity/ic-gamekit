@@ -6,11 +6,13 @@ using System.IO;
 
 namespace InternetComputer
 {
-    public class ICBuilder : IPostprocessBuildWithReport
+    // This is a post-process script to generate the ic project from the untiy webgl build.
+    public class ICConnector : IPostprocessBuildWithReport
     {
         internal const string kWebGLBuildDirectory = "Build";
         internal const string kWebGLTemplateDataDirectory = "TemplateData";
         internal const string kWebGLIndexFile = "index.html";
+        internal const string kICPojectFolder = "ic-project";
 
         // Set it to a higer number to make sure it gets called after other postprocess scripts.
         public int callbackOrder { get { return 100; } }
@@ -28,7 +30,7 @@ namespace InternetComputer
             GenerateDfxJsonFile(report, icSettings);
         }
 
-        // Convert the Unity WebGL build content into a dfx project under "ic-builder" folder.
+        // Convert the Unity WebGL build content into a dfx project under "ic-project" folder.
         private void MoveFiles(BuildReport report, ICSettings icSettings)
         {
             if (string.IsNullOrEmpty(icSettings.m_CanisterName))
@@ -37,15 +39,15 @@ namespace InternetComputer
                 return;
             }
 
-            // Prepare an empty path for ic builder, along with the subdirectories for canister assets and src.
-            var icBuilderPath = Path.Combine(report.summary.outputPath, "ic-builder");
-            var canisterPath = Path.Combine(icBuilderPath, "src", icSettings.m_CanisterName);
+            // Prepare an empty path for the ic project, along with the subdirectories for canister assets and src.
+            var icProjectPath = Path.Combine(report.summary.outputPath, kICPojectFolder);
+            var canisterPath = Path.Combine(icProjectPath, "src", icSettings.m_CanisterName);
             var canisterAssetsPath = Path.Combine(canisterPath, "assets");
             var canisterSrcPath = Path.Combine(canisterPath, "src");
-            if (Directory.Exists(icBuilderPath))
-                Directory.Delete(icBuilderPath, true);
+            if (Directory.Exists(icProjectPath))
+                Directory.Delete(icProjectPath, true);
 
-            Directory.CreateDirectory(icBuilderPath);
+            Directory.CreateDirectory(icProjectPath);
             Directory.CreateDirectory(canisterPath);
             Directory.CreateDirectory(canisterAssetsPath);
             Directory.CreateDirectory(canisterSrcPath);
@@ -97,7 +99,7 @@ namespace InternetComputer
             sw.WriteLine("  \"version\": 1");
             sw.WriteLine("}");
 
-            File.WriteAllText(Path.Combine(report.summary.outputPath, "ic-builder", "dfx.json"), sw.ToString());
+            File.WriteAllText(Path.Combine(report.summary.outputPath, kICPojectFolder, "dfx.json"), sw.ToString());
         }
     }
 }
