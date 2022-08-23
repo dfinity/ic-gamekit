@@ -2,7 +2,8 @@ tool
 extends Control
 
 const settings_path = "res://addons/ic-gamekit/ic-settings.json"
-const defaultCanisterName = "godot_html5_assets"
+const default_canister_name = "godot_html5_assets"
+const ic_project_folder = "ic-project"
 
 var settings_data = { }
 
@@ -19,7 +20,7 @@ func load_settings():
 	var file = File.new()
 	
 	if not file.file_exists(settings_path):
-		$HBoxContainer/RightColumn/CanisterNameInput.text = defaultCanisterName
+		$HBoxContainer/RightColumn/CanisterNameInput.text = default_canister_name
 		$HBoxContainer/RightColumn/EnableCheckBox.pressed = false
 		return
 		
@@ -32,7 +33,7 @@ func load_settings():
 	if settings_data.has("CanisterName") :
 		$HBoxContainer/RightColumn/CanisterNameInput.text = settings_data["CanisterName"]
 	else:
-		$HBoxContainer/RightColumn/CanisterNameInput.text = defaultCanisterName
+		$HBoxContainer/RightColumn/CanisterNameInput.text = default_canister_name
 		
 	if settings_data.has("ICConnectorEnabled") :
 		$HBoxContainer/RightColumn/EnableCheckBox.pressed = settings_data["ICConnectorEnabled"]
@@ -64,7 +65,7 @@ func convert_to_ic_project(dir_path):
 	# Generate output directories.
 	var dir = Directory.new()
 	
-	var ic_project_dir = dir_path + "/ic_project"
+	var ic_project_dir = dir_path + "/" + ic_project_folder
 	if dir.dir_exists(ic_project_dir):
 		remove_dir_recursively(ic_project_dir)
 	dir.make_dir(ic_project_dir)
