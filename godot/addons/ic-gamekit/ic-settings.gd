@@ -44,7 +44,7 @@ func load_settings():
 func save_settings(var data):
 	var file = File.new();
 	file.open(settings_path, File.WRITE)
-	var json_string = JSON.print(data, "\t");
+	var json_string = JSON.print(data, "  ");
 	file.store_string(json_string)
 	file.close()
 	
@@ -58,6 +58,9 @@ func _on_FileDialog_dir_selected(dir_path):
 	convert_to_ic_project(dir_path)
 
 func convert_to_ic_project(dir_path):
+	if not $HBoxContainer/RightColumn/EnableCheckBox.pressed:
+		return
+	
 	# Generate output directories.
 	var dir = Directory.new()
 	
@@ -82,7 +85,7 @@ func convert_to_ic_project(dir_path):
 			if dir.current_is_dir(): # Skip ic_project directory itself.
 				pass
 			elif (file_name.get_extension() == "html"):
-				dir.copy(dir_path + "/" + file_name, canister_src_dir + "/" + file_name)
+				dir.copy(dir_path + "/" + file_name, canister_src_dir + "/index.html")
 			else:
 				dir.copy(dir_path + "/" + file_name, canister_assets_dir + "/" + file_name)
 			
@@ -110,4 +113,25 @@ func remove_dir_recursively(dir_path):
 		directory.remove(dir_path)
 
 func generate_dfx_json(dir_path):
-	pass
+	var canister_name = $HBoxContainer/RightColumn/CanisterNameInput.text
+	var dfx_content = {
+		"canisters" : {
+			canister_name : {
+				"frontend" : {
+					"entrypoint": "src/" + canister_name + "/src/index.html"
+				},
+				"source" : [
+					"src/" + canister_name + "/assets",
+					"src/" + canister_name + "/src"
+				],
+				"type" : "assets"
+			}
+		},
+		"version" : 1
+	}
+	
+	var file = File.new();
+	file.open(dir_path + "/dfx.json", File.WRITE)
+	var json_string = JSON.print(dfx_content, "  ");
+	file.store_string(json_string)
+	file.close()
