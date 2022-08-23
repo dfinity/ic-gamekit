@@ -61,8 +61,11 @@ func convert_to_ic_project(dir_path):
 	var dir = Directory.new()
 	
 	var ic_project_dir = dir_path + "/ic_project"
-	var canister_dir = ic_project_dir + "/src/" + $HBoxContainer/RightColumn/CanisterNameInput.text
+	if dir.dir_exists(ic_project_dir):
+		remove_dir_recursively(ic_project_dir)
 	dir.make_dir(ic_project_dir)
+	
+	var canister_dir = ic_project_dir + "/src/" + $HBoxContainer/RightColumn/CanisterNameInput.text
 	dir.make_dir_recursive(canister_dir)
 	
 	var canister_assets_dir = canister_dir + "/assets"
@@ -70,12 +73,12 @@ func convert_to_ic_project(dir_path):
 	dir.make_dir(canister_assets_dir)
 	dir.make_dir(canister_src_dir)
 	
-	# Loop selected directory to copy the files.
+	# Loop the selected directory to copy the files.
 	if dir.open(dir_path) == OK:
-		dir.list_dir_begin()
+		dir.list_dir_begin(true)
 		var file_name = dir.get_next()
 		while file_name != "":
-			if dir.current_is_dir():
+			if dir.current_is_dir(): # Skip ic_project directory itself.
 				pass
 			elif (file_name.get_extension() == "html"):
 				dir.copy(dir_path + "/" + file_name, canister_src_dir + "/" + file_name)
@@ -88,5 +91,22 @@ func convert_to_ic_project(dir_path):
 	
 	generate_dfx_json(ic_project_dir)
 	
+func remove_dir_recursively(dir_path):
+	var directory = Directory.new()
+	
+	# Loop the selected directory to copy the files.
+	var res = directory.open(dir_path)
+	if res == OK:
+		directory.list_dir_begin(true)
+		var file_name = directory.get_next()
+		while file_name != "":
+			if directory.current_is_dir():
+				remove_dir_recursively(dir_path + "/" + file_name)
+			else:
+				directory.remove(file_name)
+			file_name = directory.get_next()
+		
+		directory.remove(dir_path)
+
 func generate_dfx_json(dir_path):
 	pass
