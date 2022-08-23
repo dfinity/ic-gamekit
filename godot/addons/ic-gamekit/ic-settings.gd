@@ -52,7 +52,41 @@ func save_settings(var data):
 func _on_ExportBtn_pressed():
 	$FileDialog.popup_centered()
 
-func _on_FileDialog_dir_selected(dir):
-#	Convert to IC project
-	print(dir)
+func _on_FileDialog_dir_selected(dir_path):
+	print(dir_path)
+	convert_to_ic_project(dir_path)
+
+func convert_to_ic_project(dir_path):
+	# Generate output directories.
+	var dir = Directory.new()
 	
+	var ic_project_dir = dir_path + "/ic_project"
+	var canister_dir = ic_project_dir + "/src/" + $HBoxContainer/RightColumn/CanisterNameInput.text
+	dir.make_dir(ic_project_dir)
+	dir.make_dir_recursive(canister_dir)
+	
+	var canister_assets_dir = canister_dir + "/assets"
+	var canister_src_dir = canister_dir + "/src"
+	dir.make_dir(canister_assets_dir)
+	dir.make_dir(canister_src_dir)
+	
+	# Loop selected directory to copy the files.
+	if dir.open(dir_path) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+			elif (file_name.get_extension() == "html"):
+				dir.copy(dir_path + "/" + file_name, canister_src_dir + "/" + file_name)
+			else:
+				dir.copy(dir_path + "/" + file_name, canister_assets_dir + "/" + file_name)
+			
+			file_name = dir.get_next()
+	else:
+		print("Failed to access")
+	
+	generate_dfx_json(ic_project_dir)
+	
+func generate_dfx_json(dir_path):
+	pass
