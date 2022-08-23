@@ -44,7 +44,8 @@ func load_settings():
 func save_settings(var data):
 	var file = File.new();
 	file.open(settings_path, File.WRITE)
-	file.store_line((to_json(data)))
+	var json_string = JSON.print(data, "\t");
+	file.store_string(json_string)
 	file.close()
 	
 	print("IC Settings saved.")
