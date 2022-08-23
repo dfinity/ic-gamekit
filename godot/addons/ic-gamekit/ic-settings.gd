@@ -8,20 +8,19 @@ var settings_data = { }
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$HBoxContainer/RightColumn/Button.connect("pressed", self, "_on_save_button_pressed");
 	load_settings()
 
-func _on_save_button_pressed():
-	settings_data["CanisterName"] = $HBoxContainer/RightColumn/LineEdit.text;
-	settings_data["ICConnectorEnabled"] = $HBoxContainer/RightColumn/CheckBox.pressed;
+func _on_SaveSettingsBtn_pressed():
+	settings_data["CanisterName"] = $HBoxContainer/RightColumn/CanisterNameInput.text;
+	settings_data["ICConnectorEnabled"] = $HBoxContainer/RightColumn/EnableCheckBox.pressed;
 	save_settings(settings_data);
 
 func load_settings():
 	var file = File.new()
 	
 	if not file.file_exists(settings_path):
-		$HBoxContainer/RightColumn/LineEdit.text = defaultCanisterName
-		$HBoxContainer/RightColumn/CheckBox.pressed = false
+		$HBoxContainer/RightColumn/CanisterNameInput.text = defaultCanisterName
+		$HBoxContainer/RightColumn/EnableCheckBox.pressed = false
 		return
 		
 	file.open(settings_path, file.READ)
@@ -31,14 +30,14 @@ func load_settings():
 	file.close()
 	
 	if settings_data.has("CanisterName") :
-		$HBoxContainer/RightColumn/LineEdit.text = settings_data["CanisterName"]
+		$HBoxContainer/RightColumn/CanisterNameInput.text = settings_data["CanisterName"]
 	else:
-		$HBoxContainer/RightColumn/LineEdit.text = defaultCanisterName
+		$HBoxContainer/RightColumn/CanisterNameInput.text = defaultCanisterName
 		
 	if settings_data.has("ICConnectorEnabled") :
-		$HBoxContainer/RightColumn/CheckBox.pressed = settings_data["ICConnectorEnabled"]
+		$HBoxContainer/RightColumn/EnableCheckBox.pressed = settings_data["ICConnectorEnabled"]
 	else:
-		$HBoxContainer/RightColumn/CheckBox.pressed = false
+		$HBoxContainer/RightColumn/EnableCheckBox.pressed = false
 	
 	print("IC Settings loaded.")
 	
@@ -49,3 +48,11 @@ func save_settings(var data):
 	file.close()
 	
 	print("IC Settings saved.")
+
+func _on_ExportBtn_pressed():
+	$FileDialog.popup_centered()
+
+func _on_FileDialog_dir_selected(dir):
+#	Convert to IC project
+	print(dir)
+	
