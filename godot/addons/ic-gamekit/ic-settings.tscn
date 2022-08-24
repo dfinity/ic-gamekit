@@ -5,6 +5,10 @@
 [node name="IC Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -258.0
+margin_top = 47.0
+margin_right = -258.0
+margin_bottom = 47.0
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -39,22 +43,49 @@ margin_right = 1004.0
 margin_bottom = 76.0
 size_flags_horizontal = 3
 
-[node name="LineEdit" type="LineEdit" parent="HBoxContainer/RightColumn"]
+[node name="CanisterNameInput" type="LineEdit" parent="HBoxContainer/RightColumn"]
 margin_right = 872.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "godot_html5_assets"
 
-[node name="CheckBox" type="CheckBox" parent="HBoxContainer/RightColumn"]
+[node name="EnableCheckBox" type="CheckBox" parent="HBoxContainer/RightColumn"]
 margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 52.0
 size_flags_horizontal = 0
+pressed = true
 
-[node name="Button" type="Button" parent="HBoxContainer/RightColumn"]
-margin_left = 831.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightColumn"]
+margin_left = 672.0
 margin_top = 56.0
 margin_right = 872.0
 margin_bottom = 76.0
 size_flags_horizontal = 8
-text = "Save"
+
+[node name="SaveSettingsBtn" type="Button" parent="HBoxContainer/RightColumn/HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 20.0
+size_flags_horizontal = 8
+text = "Save Settings"
+
+[node name="ExportBtn" type="Button" parent="HBoxContainer/RightColumn/HBoxContainer"]
+margin_left = 100.0
+margin_right = 200.0
+margin_bottom = 20.0
+text = "Export To IC..."
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 315.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 480, 360 )
+window_title = "Export To IC"
+resizable = true
+mode = 2
+access = 2
+current_dir = "/git/ic-gamekit/godot"
+current_path = "/git/ic-gamekit/godot/"
+
+[connection signal="pressed" from="HBoxContainer/RightColumn/HBoxContainer/SaveSettingsBtn" to="." method="_on_SaveSettingsBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightColumn/HBoxContainer/ExportBtn" to="." method="_on_ExportBtn_pressed"]
+[connection signal="dir_selected" from="FileDialog" to="." method="_on_FileDialog_dir_selected"]
