@@ -5,7 +5,7 @@ const ic_project_folder = "ic-project"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("On ic-exporter ready")
+	pass
 
 func _on_Button_pressed():
 	$FileDialog.popup_centered()
@@ -14,8 +14,7 @@ func _on_FileDialog_dir_selected(dir_path):
 	convert_to_ic_project(dir_path)
 
 func convert_to_ic_project(dir_path):
-	if not $HBoxContainer/RightColumn/EnableCheckBox.pressed:
-		return
+	var settings = ICSettingsUtilities.load_settings("res://addons/ic-gamekit/ic-settings.json")
 	
 	# Generate output directories.
 	var dir = Directory.new()
@@ -25,7 +24,7 @@ func convert_to_ic_project(dir_path):
 		remove_dir_recursively(ic_project_dir)
 	dir.make_dir(ic_project_dir)
 	
-	var canister_dir = ic_project_dir + "/src/" + $HBoxContainer/RightColumn/CanisterNameInput.text
+	var canister_dir = ic_project_dir + "/src/" + settings["CanisterName"]
 	dir.make_dir_recursive(canister_dir)
 	
 	var canister_assets_dir = canister_dir + "/assets"
@@ -49,9 +48,9 @@ func convert_to_ic_project(dir_path):
 	else:
 		print("Failed to access")
 	
-	generate_dfx_json(ic_project_dir)
+	generate_dfx_json(ic_project_dir, settings["CanisterName"])
 	print("IC project generated")
-	
+
 func remove_dir_recursively(dir_path):
 	var directory = Directory.new()
 	
@@ -69,8 +68,7 @@ func remove_dir_recursively(dir_path):
 		
 		directory.remove(dir_path)
 
-func generate_dfx_json(dir_path):
-	var canister_name = $HBoxContainer/RightColumn/CanisterNameInput.text
+func generate_dfx_json(dir_path, canister_name):
 	var dfx_content = {
 		"canisters" : {
 			canister_name : {
