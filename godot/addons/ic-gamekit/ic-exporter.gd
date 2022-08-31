@@ -14,7 +14,7 @@ func _on_Button_pressed():
 
 
 func _on_ICConnector_enabled(toggled):
-	$Button.disabled = not toggled
+	$Button.visible = toggled
 
 
 func _on_FileDialog_dir_selected(dir_path):
