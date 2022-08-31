@@ -3,6 +3,7 @@ class_name ICSettingsUtilities
 
 const default_canister_name = "godot_html5_assets"
 
+
 static func load_settings(settings_path):
 	var settings_data = { }
 	
@@ -24,6 +25,7 @@ static func load_settings(settings_path):
 		settings_data["ICConnectorEnabled"] = false
 		
 	return settings_data
+
 
 static func save_settings(settings_path, settings_data):
 	# Save the settings data as a json file.

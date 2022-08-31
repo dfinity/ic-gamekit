@@ -3,18 +3,23 @@ extends Control
 
 const ic_project_folder = "ic-project"
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
+
 func _on_Button_pressed():
 	$FileDialog.popup_centered()
+
 
 func _on_ICConnector_enabled():
 	print("signal received")
 
+
 func _on_FileDialog_dir_selected(dir_path):
 	convert_to_ic_project(dir_path)
+
 
 func convert_to_ic_project(dir_path):
 	var settings = ICSettingsUtilities.load_settings("res://addons/ic-gamekit/ic-settings.json")
@@ -54,6 +59,7 @@ func convert_to_ic_project(dir_path):
 	generate_dfx_json(ic_project_dir, settings["CanisterName"])
 	print("IC project generated")
 
+
 func remove_dir_recursively(dir_path):
 	var directory = Directory.new()
 	
@@ -70,6 +76,7 @@ func remove_dir_recursively(dir_path):
 			file_name = directory.get_next()
 		
 		directory.remove(dir_path)
+
 
 func generate_dfx_json(dir_path, canister_name):
 	var dfx_content = {
