@@ -13,8 +13,8 @@ func _on_Button_pressed():
 	$FileDialog.popup_centered()
 
 
-func _on_ICConnector_enabled():
-	print("signal received")
+func _on_ICConnector_enabled(toggled):
+	$Button.disabled = not toggled
 
 
 func _on_FileDialog_dir_selected(dir_path):
