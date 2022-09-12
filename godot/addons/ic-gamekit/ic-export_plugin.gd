@@ -22,7 +22,6 @@ func _export_begin(features, is_debug, path, flags):
 		return
 		
 	output_path = path.get_base_dir()
-#	ICSettingsUtilities.remove_dir_recursively(output_path + "/" + ICSettingsUtilities.ic_project_folder)
 
 
 func _export_end():
@@ -30,6 +29,7 @@ func _export_end():
 		return
 	
 	convert_to_ic_project(output_path)
+
 
 func convert_to_ic_project(dir_path):
 	var settings = ICSettingsUtilities.load_settings("res://addons/ic-gamekit/ic-settings.json")

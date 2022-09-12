@@ -22,9 +22,6 @@ func _on_SaveSettingsBtn_pressed():
 
 
 func save_settings():
-	var node = get_node("LeftColumn")
-	print(node)
-	
 	var settings_data = {
 		"CanisterName" : $HBoxContainer/RightColumn/CanisterNameInput.text,
 		"ICConnectorEnabled" : $HBoxContainer/RightColumn/EnableCheckBox.pressed
@@ -32,4 +29,3 @@ func save_settings():
 	ICSettingsUtilities.save_settings(settings_path, settings_data)
 	
 	print("IC Settings saved.")
-
