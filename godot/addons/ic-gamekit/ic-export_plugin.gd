@@ -1,7 +1,7 @@
 tool
 extends EditorExportPlugin
 
-const html5_feature = "HTML5"
+const html5_feature = "html5"
 const ic_project_folder = "ic-project"
 
 var is_html5_export
@@ -14,21 +14,19 @@ func _ready():
 
 
 func _export_begin(features, is_debug, path, flags):
-	print(features)
-	if html5_feature in features:
-		is_html5_export = true
-	else:
-		is_html5_export = false
-		return
-		
-	output_path = path.get_base_dir()
+	is_html5_export = false;
+	
+	# Only take care of HTML5 build.
+	for feature in features:
+		if feature.to_lower() == html5_feature:
+			is_html5_export = true
+			output_path = path.get_base_dir()
+			break
 
 
 func _export_end():
-	if not is_html5_export:
-		return
-	
-	convert_to_ic_project(output_path)
+	if is_html5_export:
+		convert_to_ic_project(output_path)
 
 
 func convert_to_ic_project(dir_path):
@@ -52,7 +50,7 @@ func convert_to_ic_project(dir_path):
 	dir.make_dir(canister_assets_dir)
 	dir.make_dir(canister_src_dir)
 	
-	# Loop the selected directory to copy the files.
+	# Loop the selected directory to copy files.
 	if dir.open(dir_path) == OK:
 		dir.list_dir_begin(true)
 		var file_name = dir.get_next()
@@ -75,7 +73,7 @@ func convert_to_ic_project(dir_path):
 func remove_dir_recursively(dir_path):
 	var directory = Directory.new()
 	
-	# Loop the selected directory to copy the files.
+	# Loop the selected directory to remove files.
 	var res = directory.open(dir_path)
 	if res == OK:
 		directory.list_dir_begin(true)
@@ -117,5 +115,3 @@ func generate_dfx_json(dir_path, canister_name):
 func _export_file(path, type, features):
 	if "addons/ic-gamekit" in path:
 		skip()
-	
-	print(path)
