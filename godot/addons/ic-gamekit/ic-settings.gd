@@ -3,8 +3,6 @@ extends Control
 
 const settings_path = "res://addons/ic-gamekit/ic-settings.json"
 
-signal ic_conector_enabled(toggled)
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,9 +22,6 @@ func _on_SaveSettingsBtn_pressed():
 
 
 func save_settings():
-	var node = get_node("LeftColumn")
-	print(node)
-	
 	var settings_data = {
 		"CanisterName" : $HBoxContainer/RightColumn/CanisterNameInput.text,
 		"ICConnectorEnabled" : $HBoxContainer/RightColumn/EnableCheckBox.pressed
@@ -34,7 +29,3 @@ func save_settings():
 	ICSettingsUtilities.save_settings(settings_path, settings_data)
 	
 	print("IC Settings saved.")
-
-
-func _on_ICConnector_toggled(button_pressed):
-	emit_signal("ic_conector_enabled", button_pressed)

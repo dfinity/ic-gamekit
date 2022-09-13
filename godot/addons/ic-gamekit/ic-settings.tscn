@@ -69,5 +69,4 @@ margin_bottom = 20.0
 size_flags_horizontal = 8
 text = "Save Settings"
 
-[connection signal="toggled" from="HBoxContainer/RightColumn/EnableCheckBox" to="." method="_on_ICConnector_toggled"]
 [connection signal="pressed" from="HBoxContainer/RightColumn/HBoxContainer/SaveSettingsBtn" to="." method="_on_SaveSettingsBtn_pressed"]
