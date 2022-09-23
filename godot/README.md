@@ -16,7 +16,7 @@ This configs the asset canister name in the `dfx.json` file for the generated IC
 
 ### Enable IC Connector
 
-You can turn on/off the post-build callback. With this checked, a folder named `ic-project` will be generated under the Godot HTML5 export path. Now only `Export Project` is supported, `Export PCK/Zip` will be supported in the future.
+You can turn on/off the IC Connector. With this checked, a folder named `ic-project` will be generated under the Godot HTML5 export path. Now only `Export Project` is supported, `Export PCK/Zip` will be supported in the future.
 
 ### Deployment
 
@@ -26,4 +26,8 @@ Please follow the [Godot HTML5 Sample](https://github.com/dfinity/examples/tree/
 
 ### Get 500 error while browsing the game
 
-If you get 500 error while accessing the game in the browsers, try to use `raw` keyword in the URL like https://\<canister-id\>.raw.ic0.app. Unity generates pretty large `.data` and `.wasm` files which can only be served using `raw` keyword.
+If you get 500 error while accessing the game in the browsers, try to use `raw` keyword in the URL like https://\<canister-id\>.raw.ic0.app. Godot generates pretty large `.pck` and `.wasm` files which can only be served using `raw` keyword.
+
+### GDScripts in the plugin are included in the exported .pck file
+
+You may notice that the GDScripts in the plugin are included in the exported .pck file, please go to `Export` -> `Resources` to add `addons/ic-gamekit/*` as the exclude folder. 
