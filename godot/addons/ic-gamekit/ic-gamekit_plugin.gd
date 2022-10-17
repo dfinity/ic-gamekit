@@ -1,11 +1,11 @@
-tool
+@tool
 extends EditorPlugin
 
 var ic_settings
 var ic_export_plugin
 
 func _enter_tree():
-	ic_settings = preload("res://addons/ic-gamekit/ic-settings.tscn").instance()
+	ic_settings = preload("res://addons/ic-gamekit/ic-settings.tscn").instantiate()
 	add_control_to_container(EditorPlugin.CONTAINER_PROJECT_SETTING_TAB_RIGHT, ic_settings)
 	
 	ic_export_plugin = preload("res://addons/ic-gamekit/ic-export_plugin.gd").new()

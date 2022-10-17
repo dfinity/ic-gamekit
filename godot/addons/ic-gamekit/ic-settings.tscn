@@ -5,67 +5,67 @@
 [node name="IC Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -258.0
-margin_top = 47.0
-margin_right = -258.0
-margin_bottom = 47.0
+offset_left = -258.0
+offset_top = 47.0
+offset_right = -258.0
+offset_bottom = 47.0
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = 76.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 76.0
 
 [node name="LeftColumn" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 128.0
-margin_bottom = 76.0
+offset_right = 128.0
+offset_bottom = 76.0
 
 [node name="CanisterName" type="Label" parent="HBoxContainer/LeftColumn"]
-margin_right = 128.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 128, 24 )
+offset_right = 128.0
+offset_bottom = 24.0
+minimum_size = Vector2( 128, 24 )
 text = "Canister Name"
 valign = 1
 
 [node name="ICConnector" type="Label" parent="HBoxContainer/LeftColumn"]
-margin_top = 28.0
-margin_right = 128.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 128, 24 )
+offset_top = 28.0
+offset_right = 128.0
+offset_bottom = 52.0
+minimum_size = Vector2( 128, 24 )
 text = "Enable IC Connector"
 valign = 1
 
 [node name="RightColumn" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 132.0
-margin_right = 1004.0
-margin_bottom = 76.0
+offset_left = 132.0
+offset_right = 1004.0
+offset_bottom = 76.0
 size_flags_horizontal = 3
 
 [node name="CanisterNameInput" type="LineEdit" parent="HBoxContainer/RightColumn"]
-margin_right = 872.0
-margin_bottom = 24.0
+offset_right = 872.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 text = "test"
 
 [node name="EnableCheckBox" type="CheckBox" parent="HBoxContainer/RightColumn"]
-margin_top = 28.0
-margin_right = 24.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 24.0
+offset_bottom = 52.0
 size_flags_horizontal = 0
 pressed = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightColumn"]
-margin_left = 776.0
-margin_top = 56.0
-margin_right = 872.0
-margin_bottom = 76.0
+offset_left = 776.0
+offset_top = 56.0
+offset_right = 872.0
+offset_bottom = 76.0
 size_flags_horizontal = 8
 
 [node name="SaveSettingsBtn" type="Button" parent="HBoxContainer/RightColumn/HBoxContainer"]
-margin_right = 96.0
-margin_bottom = 20.0
+offset_right = 96.0
+offset_bottom = 20.0
 size_flags_horizontal = 8
 text = "Save Settings"
 

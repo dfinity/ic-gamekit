@@ -6,17 +6,28 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
+
+_global_script_classes=[{
+"base": "Node",
+"class": &"ICSettingsUtilities",
+"language": &"GDScript",
+"path": "res://addons/ic-gamekit/ic-settings-utilities.gd"
+}]
+_global_script_class_icons={
+"ICSettingsUtilities": ""
+}
 
 [application]
 
 config/name="ICPluginDemo"
 run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/ic-gamekit/plugin.cfg" )
+enabled=PackedStringArray()
 
 [physics]
 

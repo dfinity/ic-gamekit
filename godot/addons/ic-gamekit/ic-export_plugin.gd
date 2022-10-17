@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorExportPlugin
 
 const html5_feature = "html5"
@@ -52,7 +52,7 @@ func convert_to_ic_project(dir_path):
 	
 	# Loop the selected directory to copy files.
 	if dir.open(dir_path) == OK:
-		dir.list_dir_begin(true)
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir(): # Skip ic_project directory itself.
@@ -73,19 +73,19 @@ func convert_to_ic_project(dir_path):
 func remove_dir_recursively(dir_path):
 	var directory = Directory.new()
 	
-	# Loop the selected directory to remove files.
+	# Loop the selected directory to remove_at files.
 	var res = directory.open(dir_path)
 	if res == OK:
-		directory.list_dir_begin(true)
+		directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var file_name = directory.get_next()
 		while file_name != "":
 			if directory.current_is_dir():
 				remove_dir_recursively(dir_path + "/" + file_name)
 			else:
-				directory.remove(file_name)
+				directory.remove_at(file_name)
 			file_name = directory.get_next()
 		
-		directory.remove(dir_path)
+		directory.remove_at(dir_path)
 
 
 func generate_dfx_json(dir_path, canister_name):

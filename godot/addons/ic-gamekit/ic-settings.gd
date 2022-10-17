@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 
 const settings_path = "res://addons/ic-gamekit/ic-settings.json"
@@ -12,7 +12,7 @@ func _ready():
 func init_settings():
 	var settings_data = ICSettingsUtilities.load_settings(settings_path)
 	$HBoxContainer/RightColumn/CanisterNameInput.text = settings_data["CanisterName"]
-	$HBoxContainer/RightColumn/EnableCheckBox.pressed = settings_data["ICConnectorEnabled"]
+	$HBoxContainer/RightColumn/EnableCheckBox.button_pressed = settings_data["ICConnectorEnabled"]
 	
 	print("IC Settings initialized.")
 
