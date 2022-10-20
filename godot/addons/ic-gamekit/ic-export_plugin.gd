@@ -107,7 +107,7 @@ func generate_dfx_json(dir_path, canister_name):
 	
 	var file = File.new();
 	file.open(dir_path + "/dfx.json", File.WRITE)
-	var json_string = JSON.print(dfx_content, "  ");
+	var json_string = JSON.stringify(dfx_content, "  ");
 	file.store_string(json_string)
 	file.close()
 

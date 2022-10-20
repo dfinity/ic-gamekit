@@ -34,7 +34,7 @@ static func save_settings(settings_path, settings_data):
 	var file = File.new();
 	
 	file.open(settings_path, File.WRITE)
-	var json_string = JSON.print(settings_data, "  ");
+	var json_string = JSON.stringify(settings_data, "  ");
 	file.store_string(json_string)
 	
 	file.close()
