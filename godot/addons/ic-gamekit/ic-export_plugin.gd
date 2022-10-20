@@ -52,7 +52,7 @@ func convert_to_ic_project(dir_path):
 	
 	# Loop the selected directory to copy files.
 	if dir.open(dir_path) == OK:
-		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir(): # Skip ic_project directory itself.
@@ -76,7 +76,7 @@ func remove_dir_recursively(dir_path):
 	# Loop the selected directory to remove_at files.
 	var res = directory.open(dir_path)
 	if res == OK:
-		directory.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+		directory.list_dir_begin()
 		var file_name = directory.get_next()
 		while file_name != "":
 			if directory.current_is_dir():
