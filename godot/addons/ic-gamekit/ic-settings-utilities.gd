@@ -13,9 +13,7 @@ static func load_settings(settings_path):
 		file.open(settings_path, file.READ)
 		
 		var text = file.get_as_text();
-		var test_json_conv = JSON.new()
-		test_json_conv.parse(text)
-		settings_data = test_json_conv.get_data()
+		settings_data = JSON.parse_string(text)
 		
 		file.close()
 	
