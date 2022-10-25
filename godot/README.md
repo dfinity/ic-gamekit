@@ -1,8 +1,10 @@
 # Internet Computer GameKit for Godot
-Internet Computer GameKit is an open-source toolkit for Godot game developers who want to develop games on the Internet Computer. It's under `godot/addons/ic-gamekit` folder which contains a Godot plugin for Internet Computer.
+Internet Computer GameKit is an open-source toolkit for Godot game developers who want to develop games on the Internet Computer. It's under `godot/*.*/addons/ic-gamekit` folder which contains a Godot plugin for Internet Computer.
 
 ## Installing
-You can just simply copy `addons/ic-gamekit` folder under you Godot project folder. Make sure you enable it via `Project Settings -> Plugins`. It's compatible with Godot 3.x.
+You can just simply copy `addons/ic-gamekit` folder to you Godot project folder. Make sure you enable it via `Project Settings -> Plugins`. 
+
+The plugin system in Godot has been upgraded in Godot 4.x which is not compatible with Godot 3.x. This is why we have two versions under different folders, which are named with the Godot version number. Please make sure you choose the right Godot version before installing.
 
 ## IC Connector
 
