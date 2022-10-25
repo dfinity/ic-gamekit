@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using System.IO;
+using System.Collections.Generic;
 
 namespace InternetComputer
 {
@@ -56,7 +57,9 @@ namespace InternetComputer
             var webglBuildPath = Path.Combine(report.summary.outputPath, kWebGLBuildDirectory);
             if (Directory.Exists(webglBuildPath))
             {
-                FileUtil.CopyFileOrDirectory(webglBuildPath, Path.Combine(canisterAssetsPath, kWebGLBuildDirectory));
+                var outputDirectory = Path.Combine(canisterAssetsPath, kWebGLBuildDirectory);
+                FileUtil.CopyFileOrDirectory(webglBuildPath, outputDirectory);
+                GenerateContentTypeMappingJsonFile(outputDirectory);
             }
 
             // Template data exists for Default build.
@@ -71,6 +74,71 @@ namespace InternetComputer
             {
                 FileUtil.CopyFileOrDirectory(webglIndexFilePath, Path.Combine(canisterSrcPath, kWebGLIndexFile));
             }
+        }
+
+        struct MIMETypeMap
+        {
+            public string FileExtension;
+            public string ContentType;
+            public string ContentEncoding;
+
+            public MIMETypeMap(string fileExtension, string contentType, string contentEncoding)
+            {
+                this.FileExtension = fileExtension;
+                this.ContentType = contentType;
+                this.ContentEncoding = contentEncoding;
+            }
+        }
+
+        // Generating the content type mapping json file to fix the below issue
+        // https://github.com/dfinity/ic-gamekit/blob/main/unity/README.md#cant-load-the-game-successfully-with-compression-enabled-for-webgl
+        private void GenerateContentTypeMappingJsonFile(string outputDirectory)
+        {
+            // Skip if compression is disabled or decompression fallback is enabled.
+            if (PlayerSettings.WebGL.compressionFormat == WebGLCompressionFormat.Disabled || PlayerSettings.WebGL.decompressionFallback)
+                return;
+
+            // Set different file extensions and encoding types according to the compression format.
+            string fileExtension = string.Empty;
+            string encoding = string.Empty;
+            if (PlayerSettings.WebGL.compressionFormat == WebGLCompressionFormat.Gzip)
+            {
+                fileExtension = ".gz";
+                encoding = "gzip";
+            }
+            else if(PlayerSettings.WebGL.compressionFormat == WebGLCompressionFormat.Brotli)
+            {
+                fileExtension = ".br";
+                encoding = "br";
+            }
+
+            var mimeTypes = new List<MIMETypeMap>()
+            {
+                new MIMETypeMap("*.data" + fileExtension,  "application/octet-stream", encoding),
+                new MIMETypeMap("*.js" + fileExtension,  "application/javascript", encoding),
+                new MIMETypeMap("*.wasm" + fileExtension,  "application/wasm", encoding)
+            };
+
+            // Generate json string from the mime type list.
+            StringWriter sw = new StringWriter();
+            sw.WriteLine("[");
+            for (int i = 0; i < mimeTypes.Count; i++)
+            {
+                var mimeType = mimeTypes[i];
+                sw.WriteLine("  {");
+                sw.WriteLine("    \"match\": \"" + mimeType.FileExtension + "\",");
+                sw.WriteLine("    \"headers\": {");
+                sw.WriteLine("      \"Content-Type\": \"" + mimeType.ContentType + "\",");
+                sw.WriteLine("      \"Content-Encoding\": \"" + mimeType.ContentEncoding + "\"");
+                sw.WriteLine("    }");
+                if (i != mimeTypes.Count - 1)
+                    sw.WriteLine("  },");
+                else
+                    sw.WriteLine("  }");                    
+            }
+            sw.WriteLine("]");
+
+            File.WriteAllText(Path.Combine(outputDirectory, ".ic-assets.json"), sw.ToString());
         }
 
         // For now, the json support in Unity is bound to Unity serialization system, which has limitations like not supporting Dictionary etc.

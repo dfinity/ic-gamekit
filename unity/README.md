@@ -48,7 +48,7 @@ Unable to parse Build/webgl.framework.js.gz! This can happen if build compressio
 
 The reason is the `.wasm` and `.framework.js` files are compressed as `.gz`(`.br` if you use Brotli), but it needs to be treated as content-type `application/wasm` or `application/javascript` rather than `application/gzip`. Please check unity document [WebGL: Server configuration code samples](https://docs.unity3d.com/2020.1/Documentation/Manual/webgl-server-configuration-code-samples.html) for more info. 
 
-This is not supported by the IC asset canister. An workaround is using `Decompression fallback` provided by Unity, please check [WebGL: Compressed builds and server configuration](https://docs.unity3d.com/2020.1/Documentation/Manual/webgl-deploying.html) for details.
+This is only supported by the dfx `0.12.0` and above. An workaround is using `Decompression fallback` provided by Unity, please check [WebGL: Compressed builds and server configuration](https://docs.unity3d.com/2020.1/Documentation/Manual/webgl-deploying.html) for details.
 
 ### Can't load the icons correctly with the default WebGL template
 
