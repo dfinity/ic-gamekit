@@ -4,13 +4,14 @@ extends EditorExportPlugin
 const html5_feature = "html5"
 const ic_project_folder = "ic-project"
 
+var utilities_script
 var is_html5_export
 var output_path
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	utilities_script = load("res://addons/ic-gamekit/ic-settings-utilities.gd")
 
 
 func _export_begin(features, is_debug, path, flags):
@@ -30,7 +31,7 @@ func _export_end():
 
 
 func convert_to_ic_project(dir_path):
-	var settings = ICSettingsUtilities.load_settings("res://addons/ic-gamekit/ic-settings.json")
+	var settings = utilities_script.load_settings("res://addons/ic-gamekit/ic-settings.json")
 	if not settings["ICConnectorEnabled"]:
 		return
 	

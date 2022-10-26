@@ -1,5 +1,4 @@
 extends Node
-class_name ICSettingsUtilities
 
 const default_canister_name = "godot_html5_assets"
 

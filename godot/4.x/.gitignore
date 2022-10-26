@@ -1,0 +1,5 @@
+# This .gitignore file should be placed at the root of your Godot project directory
+.import/*
+.mono/*
+.godot/*
+addons/godot-plugin-refresher/*

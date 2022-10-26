@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceal63a2hn1o"]
+
+[ext_resource type="Texture2D" uid="uid://qvtirc6dbavx" path="res://dfinity-logo.png" id="1"]
+
+[node name="Node2D" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-113.0]
+
+[node name="Dfinity-logo" type="Sprite2D" parent="."]
+position = Vector2(521, 308)
+texture = ExtResource("1")
