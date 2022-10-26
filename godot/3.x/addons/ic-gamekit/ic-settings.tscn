@@ -47,14 +47,13 @@ size_flags_horizontal = 3
 margin_right = 872.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-text = "test"
+text = "godot_html5_assets"
 
 [node name="EnableCheckBox" type="CheckBox" parent="HBoxContainer/RightColumn"]
 margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 52.0
 size_flags_horizontal = 0
-pressed = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightColumn"]
 margin_left = 776.0
