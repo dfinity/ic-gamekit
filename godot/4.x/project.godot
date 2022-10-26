@@ -8,16 +8,6 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Node",
-"class": &"ICSettingsUtilities",
-"language": &"GDScript",
-"path": "res://addons/ic-gamekit/ic-settings-utilities.gd"
-}]
-_global_script_class_icons={
-"ICSettingsUtilities": ""
-}
-
 [application]
 
 config/name="ICPluginDemo"
