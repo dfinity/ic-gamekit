@@ -26,7 +26,7 @@ func _on_SaveSettingsBtn_pressed():
 func save_settings():
 	var settings_data = {
 		"CanisterName" : $HBoxContainer/RightColumn/CanisterNameInput.text,
-		"ICConnectorEnabled" : $HBoxContainer/RightColumn/EnableCheckBox.pressed
+		"ICConnectorEnabled" : $HBoxContainer/RightColumn/EnableCheckBox.button_pressed
 	}
 	utilities_script.save_settings(settings_path, settings_data)
 	
