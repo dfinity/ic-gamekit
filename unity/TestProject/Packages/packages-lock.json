@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.ic.gamekit": {
+      "version": "file:../../AssetStorePublisher/Assets/com.ic.gamekit",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.15.15",
       "depth": 0,
