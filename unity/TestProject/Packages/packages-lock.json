@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.ic.gamekit": {
-      "version": "file:com.ic.gamekit",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.collab-proxy": {
       "version": "1.15.15",
       "depth": 0,
