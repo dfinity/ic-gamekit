@@ -1,7 +1,7 @@
 {
   "name": "com.ic.gamekit",
   "displayName": "Internet Computer GameKit",
-  "version": "0.1.0-pre",
+  "version": "0.1.0",
   "unity": "2020.3",
   "description": "Internet Computer GameKit is an open-source toolkit for Unity game developers who want to develop games on the Internet Computer.",
   "author": {"name": "Dfinity"},
