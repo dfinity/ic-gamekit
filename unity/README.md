@@ -5,7 +5,7 @@ Internet Computer(IC) GameKit is an open-source toolkit for Unity game developer
 You can install the package from `Unity Package Manager` via using `Add package from git URL...` menu, by inputing the following URL.
 
 ```
-https://github.com/dfinity/ic-gamekit.git?path=/unity/AssetStorePublisher/Packages/com.ic.gamekit
+https://github.com/dfinity/ic-gamekit.git?path=/unity/AssetStorePublisher/Assets/com.ic.gamekit
 ```
 
 After installation, please follow the [IC Gamekit Package Document](./AssetStorePublisher/Assets/com.ic.gamekit/README.md) to use this package.
