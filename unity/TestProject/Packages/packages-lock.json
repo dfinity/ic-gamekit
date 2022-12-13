@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.ic.agent": {
+      "version": "file:../../com.ic.agent",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.ic.gamekit": {
       "version": "file:../../com.ic.gamekit",
       "depth": 0,

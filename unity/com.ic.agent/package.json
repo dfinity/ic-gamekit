@@ -1,0 +1,12 @@
+{
+  "name": "com.ic.agent",
+  "displayName": "Internet Computer Agent",
+  "version": "0.1.0",
+  "unity": "2020.3",
+  "description": "Internet Computer Agent is an open-source toolkit for Unity game developers who want to develop games on the Internet Computer.",
+  "author": {"name": "DFINITY"},
+  "keywords": [
+    "Internet Computer",
+    "Agent"
+  ]
+}
