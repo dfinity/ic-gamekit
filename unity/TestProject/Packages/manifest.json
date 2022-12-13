@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.ic.agent": "file:../../com.ic.agent",
     "com.ic.gamekit": "file:../../com.ic.gamekit",
     "com.unity.collab-proxy": "1.17.7",
     "com.unity.ide.rider": "3.0.16",
