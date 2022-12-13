@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.ic.gamekit": {
-      "version": "file:../../AssetStorePublisher/Assets/com.ic.gamekit",
+      "version": "file:../../com.ic.gamekit",
       "depth": 0,
       "source": "local",
       "dependencies": {}
