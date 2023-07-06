@@ -1,8 +1,9 @@
 # Internet Identity Integration
-This samples shows how to integrate Internet Identity with other platforms like Unity.
+These samples shows one way to integrate Internet Identity with other platforms like Unity.
 
 ## ii_integration_page
-It's a website that integrates with Internet Identity, with backend and frontend. It derives from the [internet_identity_integration](https://github.com/dfinity/examples/tree/master/motoko/internet_identity_integration) demo with some modifications.
+It's an example that integrates with Internet Identity, with backend and frontend. It derives from the [Internet Identity integration sample](https://github.com/dfinity/examples/tree/master/motoko/internet_identity_integration) demo with some modifications.
+Please refer to [README](./ii_integration_page/README.md) for details.
 
-### android_integration
-This is a Unity project with [ICP.NET](https://github.com/BoomDAO/ICP.NET) embedded, which is a C# agent that be able to communicate with the IC from C#.
+## android_integration
+This is a Unity project with [ICP.NET](https://github.com/BoomDAO/ICP.NET) embedded, which is a C# agent that is able to communicate with the IC from C#. Please refer to [README](./android_integration/README.md) for details. 
