@@ -2,8 +2,8 @@ import {AuthClient} from "@dfinity/auth-client"
 import {SignIdentity} from "@dfinity/agent";
 import {DelegationIdentity, Ed25519PublicKey } from "@dfinity/identity";
 
-// A faked Ed25519KeyIdentity with only the public key provided.
-class FakedEd25519KeyIdentity extends SignIdentity {
+// An imcomplete Ed25519KeyIdentity with only the public key provided.
+class ImcompleteEd25519KeyIdentity extends SignIdentity {
     constructor(publicKey) {
         super();
         this._publicKey = publicKey;
@@ -18,16 +18,19 @@ function fromHexString(hexString) {
     return new Uint8Array((hexString.match(/.{1,2}/g) ?? []).map(byte => parseInt(byte, 16))).buffer;
 }
 
-// Parse the public session key and instantiate a FakedEd25519KeyIdentity.
-let fakedEd25519KeyIdentity;
+let myKeyIdentity;
+let sessionKeyIndex = -1;
 
 var url = window.location.href;
-var keyIndex = url.indexOf("sessionkey=");
-if (keyIndex !== -1) {
-    var sessionkey = url.substring(keyIndex + "sessionkey=".length);
+sessionKeyIndex = url.indexOf("sessionkey=");
+if (sessionKeyIndex !== -1) {
+    // Parse the public session key and instantiate an ImcompleteEd25519KeyIdentity.
+    var sessionkey = url.substring(sessionKeyIndex + "sessionkey=".length);
 
     var publicKey = Ed25519PublicKey.fromDer(fromHexString(sessionkey));
-    fakedEd25519KeyIdentity = new FakedEd25519KeyIdentity(publicKey);
+    myKeyIdentity = new ImcompleteEd25519KeyIdentity(publicKey);
+} else {
+    // TODO: initialize an Ed25519KeyIdentity();
 }
 
 let delegationIdentity;
@@ -38,7 +41,7 @@ loginButton.onclick = async (e) => {
 
     // Create an auth client.
     let authClient = await AuthClient.create({
-        identity: fakedEd25519KeyIdentity,
+        identity: myKeyIdentity,
     });
 
     // Start the login process and wait for it to finish.
@@ -62,7 +65,12 @@ const openButton = document.getElementById("open");
 openButton.onclick = async (e) => {
     e.preventDefault();
 
-    var url = "vincenttest1://hello?";
+    if (sessionKeyIndex === -1) {
+        // TODO: warning for not login from a game.
+        return false;
+    }
+    
+    var url = "internetidentity://authorize?";
     if (delegationIdentity != null) {
         var delegationString = JSON.stringify(delegationIdentity.getDelegation().toJSON());
         console.log(delegationString);
