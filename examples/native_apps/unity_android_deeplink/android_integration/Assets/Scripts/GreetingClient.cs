@@ -11,6 +11,7 @@ namespace GreetingClient
 
 		public Principal CanisterId { get; }
 
+#nullable enable
 		public EdjCase.ICP.Candid.CandidConverter? Converter { get; }
 
 		public GreetingClient(IAgent agent, Principal canisterId, CandidConverter? converter = default)
@@ -19,6 +20,7 @@ namespace GreetingClient
 			this.CanisterId = canisterId;
 			this.Converter = converter;
 		}
+#nullable disable
 
 		public async System.Threading.Tasks.Task<string> Greet()
 		{
