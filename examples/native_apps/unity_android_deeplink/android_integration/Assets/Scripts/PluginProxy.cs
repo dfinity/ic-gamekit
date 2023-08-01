@@ -27,7 +27,7 @@ namespace IC.GameKit
 
         public void OpenBrowser()
         {
-            var target = testTarget + "?sessionkey=" + ByteUtil.ToHexString(mTestICPAgent.TestIdentity.PublicKey.PublicKey);
+            var target = testTarget + "?sessionkey=" + ByteUtil.ToHexString(mTestICPAgent.TestIdentity.PublicKey.Value);
 
 #if UNITY_ANDROID
             mPlugin.Call("openBrowser", target);
