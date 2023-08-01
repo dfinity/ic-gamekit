@@ -11,8 +11,8 @@ namespace IC.GameKit
         const string kAndroidNamespaceURI = "http://schemas.android.com/apk/res/android";
 
         // Android URL Scheme, you can add more parameter like port etc..
-        const string kAndroidScheme = "vincenttest1";
-        const string kAndroidHost = "hello";
+        const string kAndroidScheme = "internetidentity";
+        const string kAndroidHost = "authorize";
 
         public int callbackOrder { get { return 0; } }
 

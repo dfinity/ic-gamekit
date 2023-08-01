@@ -16,8 +16,11 @@ namespace IC.GameKit
 {
     public class TestICPAgent : MonoBehaviour
     {
+        public string greetBackendCanister = "72rj2-biaaa-aaaan-qdatq-cai";
         Text mMyPrincipalText = null;
+        Button mGreetButton = null;
         Ed25519Identity mEd25519Identity = null;
+        DelegationChainModel mDelegation = null;
 
         public Ed25519Identity TestIdentity { get { return mEd25519Identity; } }
 
@@ -26,6 +29,9 @@ namespace IC.GameKit
         {
             var go = GameObject.Find("My Princinpal");
             mMyPrincipalText = go?.GetComponent<Text>();
+
+            var buttonGo = GameObject.Find("Button_Greet");
+            mGreetButton = buttonGo?.GetComponent<Button>();
 
             mEd25519Identity = Ed25519Identity.Create();
         }
@@ -54,12 +60,23 @@ namespace IC.GameKit
             }
 
             var delegationString = HttpUtility.UrlDecode(parameters.Substring(indexOfDelegation + kDelegationParam.Length));
+            mDelegation = JsonConvert.DeserializeObject<DelegationChainModel>(delegationString);
 
-            var delegation = JsonConvert.DeserializeObject<DelegationChainModel>(delegationString);
-            CallCanister(delegation);
+            if (mDelegation != null && mGreetButton != null)
+            {
+                mGreetButton.interactable = true;
+            }
         }
 
-        public async void CallCanister(DelegationChainModel delegationChainModel)
+        public void Greet()
+        {
+            if (mDelegation == null)
+                return;
+
+            CallCanister(mDelegation);
+        }
+
+        private async void CallCanister(DelegationChainModel delegationChainModel)
         {
             Debug.Assert(delegationChainModel != null && delegationChainModel.delegations.Length >= 1);
 
@@ -82,7 +99,7 @@ namespace IC.GameKit
             // Initialize HttpAgent.
             var agent = new HttpAgent(delegationIdentity);
 
-            Principal canisterId = Principal.FromText("72rj2-biaaa-aaaan-qdatq-cai");
+            Principal canisterId = Principal.FromText(greetBackendCanister);
 
             // Intialize Client and make the call.
             var client = new GreetingClient.GreetingClient(agent, canisterId);
